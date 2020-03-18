@@ -12,7 +12,8 @@ var rx = 300;
 var ry = (800 / 2);
 var rw = 400;
 var rh = 10;
-var obj = true;
+var obj = false;
+var button;
 
 function preload(){
 }
@@ -27,6 +28,14 @@ function setup() {
   for(var i = 0; i < 100; i++){
     stars[i] = new Star();
   }
+  button = createButton('Toggle Object');
+  button.position(460, 840);
+  button.mousePressed(addobj);
+
+}
+
+function addobj(){
+  obj = !obj;
 }
 
 function draw() {
