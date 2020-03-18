@@ -5,6 +5,7 @@ var srt = false;
 var start = 0;
 var finish = 0;
 var insertion = false;
+var selection = false;
 function setup() {
   timestarted = millis();
   createCanvas(windowWidth,windowHeight - 100);
@@ -13,15 +14,16 @@ function setup() {
     rectangles.push(new Rect());
   }
   button = createButton('Bubblesort');
-  button.position(400, windowHeight - 50);
+  button.position(400, windowHeight - 75);
   button.mousePressed(setBubble);
 
-  button3 = createButton('Insertion');
-  button3.position(600, windowHeight - 50);
-  button3.mousePressed(insert);
+  button3 = createButton('Selection Sort');
+  button3.position(500, windowHeight - 75);
+  button3.mousePressed(selectionsrt);
+
 
   button2 = createButton('Scramble');
-  button2.position(700, windowHeight - 50);
+  button2.position(450, windowHeight - 40);
   button2.mousePressed(scramble);
 
 }
@@ -37,8 +39,10 @@ function scramble(){
   }
 }
 
-function insert(){
-  insertionSort(rectangles);
+
+
+function selectionsrt(){
+  selection = true;
 }
 
 function setBubble(){
@@ -54,20 +58,28 @@ function sorted(){
   return true;
 }
 
-function insertionSort(array){
-    const length = array.length;
-
-    for (let i = 1; i < length; i++) {
-
-        let key = array[i].y;
-        let j = i - 1;
-        while (j >= 0 && array[j].y > key) {
-            array[j + 1].y = array[j].y;
-            j = j - 1;
+function selectionSort (arr) {
+    let len = arr.length;
+    for (let i = 0; i < len; i++) {
+        let min = i;
+        for (let j = i + 1; j < len; j++) {
+            if (arr[min].y > arr[j].y) {
+                min = j;
+            }
         }
-        array[j+1].y = key;
+        if (min !== i) {
+            let tmp = arr[i].y;
+            arr[i].y = arr[min].y;
+            arr[min].y = tmp;
+            for(var k = 0; k < rectangles.length; k++){
+              rect(k*5, height - rectangles[k].y, rectangles[k].x, rectangles[k].y);
+            }
+            return;
+        }
     }
+    return arr;
 }
+
 
 function bubblesort(x){
   for(var i = 0; i < x.length-1; i++){
@@ -79,21 +91,24 @@ function bubblesort(x){
   }
 }
 
+
 function draw() {
   if(bubble){
     bubblesort(rectangles);
   }
 
-  if(insertion){
-    insertionSort(rectangles);
+  if(selection){
+    selectionSort(rectangles);
   }
+
   if(sorted()){
     for(var i = 0; i < rectangles.length; i++){
       fill('#7CFC00');
       rect(i*5, height - rectangles[i].y, rectangles[i].x, rectangles[i].y);
     }
     bubble = false;
-    insertion = false;
+    selection = false;
+    qsrt = false;
   }
 
   background(1);

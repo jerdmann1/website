@@ -55,12 +55,23 @@ function draw() {
       rect(mouseX,730,75,5);
     }
 
+    if(x >= 695){
+      rect(675,30,75,5);
+    }else if(x <= 0){
+      rect(0,730,75,5);
+    }else{
+      rect(x-30,30,75,5);
+    }
+
     x = x + xspeed;
     y = y + yspeed;
     if(mouseX >= 725){
       mouseX = 724;
     }
     if(y >= 725){
+      if(mouseX>=725){
+        mouseX = 720;
+      }
       if(x <= mouseX-5 || (x >= (mouseX + 82))){
         strokeWeight(3);
         stroke(51);
@@ -74,7 +85,13 @@ function draw() {
         strokeWeight(0);
         stroke(0);
         fill('black');
-        rect(mouseX,730,75,5);
+        if(mouseX>=712.5){
+          rect(675,730,75,5);
+        }else if(mouseX <= 0){
+          rect(0,730,75,5);
+        }else{
+          rect(mouseX,730,75,5);
+        }
         textSize(32);
         fill(0, 102, 153);
         strokeWeight(3);
@@ -90,10 +107,10 @@ function draw() {
 
 
 
-      yspeed -= 1;
+      yspeed -= 0.5;
       points+=50;
     }
-    if(yspeed < 0 && y <= 25){
+    if(yspeed < 0 && y <= 45){
       yspeed = -1 * yspeed;
     }
 
