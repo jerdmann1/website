@@ -79,6 +79,8 @@ function keyPressed(){
 
 
 function draw() {
+
+  frameRate(15);
   if(restart){
     snake.tail = [];
     snake.pos.x = floor(random(0,y));

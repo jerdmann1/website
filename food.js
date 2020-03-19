@@ -12,10 +12,6 @@ function Food(){
       this.x -= this.x % 15;
       this.y -= this.y % 15;
       containsFood = true;
-      console.log(x);
-      console.log(y);
-      console.log(this.y);
-      console.log(this.x);
     }
     fill('#49fb35');
     rect(this.x, this.y, 15, 15);
