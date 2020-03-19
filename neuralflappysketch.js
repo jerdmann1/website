@@ -16,6 +16,7 @@ let speed = 5;
 let frame = 75;
 let flag = true;
 let final;
+let button;
 
 function setup() {
   createCanvas(400, 600);
@@ -29,6 +30,31 @@ function setup() {
   scoreP.html('High Score: ' + high);
   genP.html('Generation: ' + gen);
   slider = createSlider(1, 10, 1);
+  button = createButton('Run Best Model');
+  button.position(width / 2 + 50, height + 50);
+  button.mousePressed(runsaved);
+}
+
+function runsaved(){
+  counter = 0;
+  for (var i = 0; i < birds.length; i++){
+    savedBirds.push(birds[i]);
+  }
+  birds = [];
+  spacing = 200;
+  speed = 5;
+  frame = 75;
+  pipes = [];
+  let high = 0;
+  let index;
+  for(var i = 0; i < savedBirds.length; i++){
+    if(savedBirds[i].score > high){
+      index = savedBirds[i].brain;
+      high = savedBirds[i].score;
+    }
+  }
+  birds.push(new Bird(index));
+  console.log(birds);
 }
 
 function landscape(){

@@ -14,7 +14,7 @@ class Bird {
     if (brain) {
       this.brain = brain.copy();
     } else {
-      this.brain = new NeuralNetwork(5, 8, 2);
+      this.brain = new NeuralNetwork(6, 8, 2);
     }
   }
 
@@ -52,6 +52,7 @@ class Bird {
     inputs[2] = closest.bottom / height;
     inputs[3] = closest.x / width;
     inputs[4] = this.velocity / 10;
+    inputs[5] = (closest.bottom - closest.top) / closest.spacing;
     let output = this.brain.predict(inputs);
     //if (output[0] > output[1] && this.velocity >= 0) {
     if (output[0] > output[1]) {
