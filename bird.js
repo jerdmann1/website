@@ -24,6 +24,8 @@ function Bird(){
   this.show = function(){
     noStroke();
     fill('yellow');
+    stroke(1);
+    strokeWeight(1);
     ellipse(this.x, this.y, 30,30);
   }
 }
