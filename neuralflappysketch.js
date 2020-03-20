@@ -17,6 +17,7 @@ let frame = 75;
 let flag = true;
 let final;
 let button;
+var cool = 100;
 
 function setup() {
   createCanvas(400, 600);
@@ -54,7 +55,6 @@ function runsaved(){
     }
   }
   birds.push(new Bird(index));
-  console.log(birds);
 }
 
 function landscape(){
@@ -76,10 +76,21 @@ function landscape(){
 
 function draw() {
   for (let n = 0; n < slider.value(); n++) {
-    if (counter % frame == 0) {
+    if(pipes.length == 0){
       pipes.push(new Pipe(spacing, speed));
     }
-    counter++;
+    let close = null;
+    let clost = Infinity;
+    for(var i = 0; i < pipes.length; i++){
+      if(pipes[i].x < clost){
+        close = pipes[i];
+      }
+    }
+
+    if(close.x < cool){
+      pipes.push(new Pipe(spacing, speed));
+    }
+
 
     for (let i = pipes.length - 1; i >= 0; i--) {
       pipes[i].update();
@@ -107,7 +118,6 @@ function draw() {
     }
 
     if (birds.length === 0) {
-      counter = 0;
       if(parseInt(savedBirds[savedBirds.length - 1].score / 10) > high){
         high = parseInt(savedBirds[savedBirds.length - 1].score / 10) ;
       }
@@ -124,9 +134,11 @@ function draw() {
       if(spacing > 100){
         spacing -= 10;
       }
-      if(speed < 10){
+      if(speed < 20){
         speed += 1;
-        frame -= 10;
+        if(cool > 100){
+          cool -= 5;
+        }
         for(var i = 0; i < pipes.length; i++){
           pipes[i].speed = speed;
         }

@@ -33,7 +33,7 @@ class Pipe {
   }
 
   offscreen() {
-    if (this.x < -this.w) {
+    if (width < -this.w) {
       return true;
     } else {
       return false;
