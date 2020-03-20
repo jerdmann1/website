@@ -47,13 +47,24 @@ class Bird {
     }
 
     let inputs = [];
-    inputs[0] = this.y / height;
-    inputs[1] = closest.top / height;
-    inputs[2] = closest.bottom / height;
-    inputs[3] = closest.x / width;
-    inputs[4] = this.velocity / 10;
-    inputs[5] = (this.y - closest.top) / closest.spacing;
-    inputs[6] = (closest.bottom - this.y) / closest.spacing;
+    if(closest != null){
+      inputs[0] = this.y / height;
+      inputs[1] = closest.top / height;
+      inputs[2] = closest.bottom / height;
+      inputs[3] = closest.x / width;
+      inputs[4] = this.velocity / 10;
+      inputs[5] = (this.y - closest.top) / closest.spacing;
+      inputs[6] = (closest.bottom - this.y) / closest.spacing;
+
+    }else{
+      inputs[0] = this.y / height;
+      inputs[1] = 1;
+      inputs[2] = 1;
+      inputs[3] = 1;
+      inputs[4] = this.velocity / 10;
+      inputs[5] = 1;
+      inputs[6] = 1;
+    }
     let output = this.brain.predict(inputs);
     //if (output[0] > output[1] && this.velocity >= 0) {
     if (output[0] > output[1]) {

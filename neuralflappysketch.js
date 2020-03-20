@@ -76,7 +76,7 @@ function landscape(){
 
 function draw() {
   for (let n = 0; n < slider.value(); n++) {
-    if (counter % 60 == 0) {
+    if (counter % frame == 0) {
       pipes.push(new Pipe(spacing, speed));
     }
     counter++;
@@ -123,6 +123,13 @@ function draw() {
     if(temp % 500 == 0 && temp != 0){
       if(spacing > 100){
         spacing -= 10;
+      }
+      if(speed < 10){
+        speed += 1;
+        frame -= 10;
+        for(var i = 0; i < pipes.length; i++){
+          pipes[i].speed = speed;
+        }
       }
     }
   }
