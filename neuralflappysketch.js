@@ -130,6 +130,7 @@ function draw() {
         if(savedBirds[i].score > highd){
           highd = savedBirds[i].score;
           d = savedBirds[i];
+          index = d.brain;
         }
       }
       nextGeneration();
