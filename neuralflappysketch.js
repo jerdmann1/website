@@ -134,8 +134,9 @@ function draw() {
       if(spacing > 100){
         spacing -= 10;
       }
-      if(speed < 20){
+      if(speed < 12){
         speed += 1;
+        console.log(speed);
         if(cool > 100){
           cool -= 5;
         }

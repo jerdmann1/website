@@ -1,4 +1,5 @@
 let birdcolor;
+let  ind;
 class Bird {
   constructor(brain) {
     this.y = height / 2;
@@ -14,7 +15,7 @@ class Bird {
     if (brain) {
       this.brain = brain.copy();
     } else {
-      this.brain = new NeuralNetwork(7, 8, 2);
+      this.brain = new NeuralNetwork(10, 8, 2);
     }
   }
 
@@ -43,6 +44,7 @@ class Bird {
       if (d < closestD && d > 0) {
         closest = pipes[i];
         closestD = d;
+        ind = i + 1;
       }
     }
 
@@ -55,7 +57,6 @@ class Bird {
       inputs[4] = this.velocity / 10;
       inputs[5] = (this.y - closest.top) / closest.spacing;
       inputs[6] = (closest.bottom - this.y) / closest.spacing;
-
     }else{
       inputs[0] = this.y / height;
       inputs[1] = 1;
@@ -64,6 +65,15 @@ class Bird {
       inputs[4] = this.velocity / 10;
       inputs[5] = 1;
       inputs[6] = 1;
+    }
+    if(pipes[ind] != null){
+      inputs[7] = pipes[ind].x / width;
+      inputs[8] = pipes[ind].top / height;
+      inputs[9] = pipes[ind].bottom / height;
+    }else{
+      inputs[7] = 1;
+      inputs[8] = 1;
+      inputs[9] = 1;
     }
     let output = this.brain.predict(inputs);
     //if (output[0] > output[1] && this.velocity >= 0) {
