@@ -18,6 +18,9 @@ let flag = true;
 let final;
 let button;
 var cool = 100;
+var highd = 0;
+var index;
+var d;
 
 function setup() {
   createCanvas(400, 600);
@@ -37,24 +40,26 @@ function setup() {
 }
 
 function runsaved(){
-  counter = 0;
-  for (var i = 0; i < birds.length; i++){
-    savedBirds.push(birds[i]);
-  }
-  birds = [];
-  spacing = 200;
-  speed = 5;
-  frame = 75;
-  pipes = [];
-  let high = 0;
-  let index;
-  for(var i = 0; i < savedBirds.length; i++){
-    if(savedBirds[i].score > high){
-      index = savedBirds[i].brain;
-      high = savedBirds[i].score;
+  if(gen > 0){
+    counter = 0;
+    for (var i = 0; i < birds.length; i++){
+      savedBirds.push(birds[i]);
     }
+    birds = [];
+    spacing = 200;
+    speed = 5;
+    frame = 75;
+    pipes = [];
+    for(var i = 0; i < savedBirds.length; i++){
+      if(savedBirds[i].score > d.score){
+        index = savedBirds[i].brain;
+        highd = savedBirds[i].score;
+        d = savedBirds[i];
+      }
+    }
+    console.log(d.score);
+    birds.push(new Bird(index));
   }
-  birds.push(new Bird(index));
 }
 
 function landscape(){
@@ -120,6 +125,12 @@ function draw() {
     if (birds.length === 0) {
       if(parseInt(savedBirds[savedBirds.length - 1].score / 10) > high){
         high = parseInt(savedBirds[savedBirds.length - 1].score / 10) ;
+      }
+      for(var i = 0; i < savedBirds.length; i++){
+        if(savedBirds[i].score > highd){
+          highd = savedBirds[i].score;
+          d = savedBirds[i];
+        }
       }
       nextGeneration();
       spacing = 200;
