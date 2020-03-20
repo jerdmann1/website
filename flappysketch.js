@@ -44,6 +44,10 @@ function setup() {
   speed = 2;
 }
 
+function mousePressed(){
+  bird.up();
+}
+
 function keyPressed(){
   if(keyCode == 32){
     bird.up();
